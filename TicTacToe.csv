@@ -1,0 +1,9 @@
+,Game ID,Player1,Player2,Winner,"GameType(1:human-bot,2:human-human)"
+1,1,Alice,Bob,Alice,2
+2,2,Alice,Chris,Chris,2
+3,3,Bob,Alice,Alice,2
+4,4,Bob,Alice,draw,2
+5,5,Alice,Bot,Alice,1
+6,6,Alice,Bob,Alice,2
+7,7,Hazel,Chris,Hazel,2
+8,8,Alice,Hazel,Hazel,2
