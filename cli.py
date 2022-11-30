@@ -6,9 +6,9 @@ from logic import make_empty_board, other_player, make_move, check_move, get_win
 from logic import show_board
 from game import Game
 import pandas as pd
-import numpy as np
-filename="TicTacToe.csv"
-player_file="player_record.csv"
+#import numpy as np
+filename="TicTacToe.csv" #record game's data
+player_file="player_record.csv" #record palyer's data
 games=pd.DataFrame(columns=[
     "ID",
     "Player1",
@@ -56,62 +56,7 @@ def add_player(name,score):
 def update_score(name):
     player_data.loc[player_data.Name==name,"Score"]+=1
 
-# #df=player_data["Name"].tolist()
-# if "Chris" in player_data["Name"].tolist():
-#     print("exist")
-# else:
-#     print("No")
-#players.to_csv(player_file,mode='a',index=False,header=False)
-#update_score("Alice")
-
-# player_data['Rank']=player_data.Score.rank(method='dense',ascending=False)
-# #print(player_data)
-# player_data.to_csv(player_file,index=False)
-# add_player("A",1)
-# print(players)
-
-#player_data.to_csv(player_file)
-#players.to_csv(player_file,mode='a',index=False,header=False)
-# def read_games():
-#     try:
-#         return pd.read_csv(filename)
-#     except FileNotFoundError:
-#         return pd.DataFrame(columns=[
-#             "ID",
-#             "Player1",
-#             "Player2",
-#             "Winner",
-#             "Type",
-#         ])
-#game_data=pd.read_csv('TicTacToe.csv')
-
 type=0
-# add_game(12,"X","Y","X",2)
-#games.to_csv(filename,mode='a',header=False)
-
-# winner_data=pd.read_csv(filename,names=col_names,header=None)
-# df=pd.value_counts(winner_data["Winner"])
-# Rank=df.Winner.rank()
-# print(Rank)
-# rank=pd.value_counts(rank_data["Winner"])
-# rank.drop("Winner",axis=0)
-# print(rank)
-
-#rank1=rank["A"]
-# 
-#print(rank1)
-#rank=rank_data["Winner"].value_counts()
-#final_rank=rank[rank["Winner"]!="Winner"]
-#print(rank)
-#print(rank[rank["Winner"]!="Winner"])
-#print(pd.value_counts(rank_data["Winner"]))
-# l=len(rank)
-# c=[]
-# for i in range(l):
-#     if rank[i]!="Winner":
-#         c.append([rank[i]])
-# print(c)
-#rank=np.array(pd.value_counts(rank_data["Winner"]))
 
 if __name__ == '__main__':
     ans=input("Do you want to play against the bot?(y or n): ").lower()
@@ -119,8 +64,28 @@ if __name__ == '__main__':
     if ans=='y':
         type=1
         game=Game()
+        #player1_name=input("Please enter your name:")
         game.run()
-        #add_game(len(game_data),player1_name,player2_name,winner_name,type)
+        player1_name=game.get_winner_name()
+        if game.get_winner()=="X":
+            add_game(len(game_data),player1_name,"Bot",player1_name,type)
+            games.to_csv(filename,mode='a',header=False)
+            if player1_name not in player_data["Name"].tolist():
+                add_player(player1_name,0)
+            players.to_csv(player_file,mode='a',index=False,header=False)
+            player_data=pd.read_csv(player_file)
+            update_score(player1_name)
+        else:
+            add_game(len(game_data),player1_name,"Bot",game.get_winner_name(),type)
+            games.to_csv(filename,mode='a',header=False)
+        
+        player_data['Rank']=player_data.Score.rank(method='dense',ascending=False)
+        player_data.to_csv(player_file,index=False)
+        print(games)
+        print("---------------------------------------")
+        print("Global rank: ")
+        print(player_data.sort_values('Rank',ascending=True))
+        
     else:
         type=2
         board = make_empty_board()
@@ -177,10 +142,9 @@ if __name__ == '__main__':
                 while (col<0 or col>2):
                     col=int(input("out of boundary, please pick a numer(0<= y <3): "))
                 
-            # TODO: Update the board.
+
             board=make_move(board,player1,player2,now,row,col)
 
-            # TODO: Show the board to the user.
             show_board(board)
 
             winner=get_winner(board)
@@ -239,7 +203,7 @@ if __name__ == '__main__':
         print(games)
         print("---------------------------------------")
         print("Global rank: ")
-        print(player_data)
+        print(player_data.sort_values('Rank',ascending=True))
         #player_data.to_csv(player_file,index=False)
 
         '''if player1_name in rank:

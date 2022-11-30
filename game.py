@@ -6,30 +6,6 @@ import pandas as pd
 import numpy as np
 filename="TicTacToe.csv"
 player_file="player_record.csv"
-"""class Board:
-    def __init__(self):
-        self.rows=[
-        [None, None, None],
-        [None, None, None],
-        [None, None, None],
-        ]
-    def __str__(self) :
-        s='-------\n'
-        for row in self.rows:
-            for cell in row:
-                s=s+'|'
-                if cell==None:
-                    s=s+' '
-                else:
-                    s=s+cell
-            s=s+'|\n-------\n'
-        return s
-    def get(self,x,y):
-        return self.rows[x][y]
-
-    def set(self,x,y,value):
-        self.rows[x][y]=value"""
-
 
 games=pd.DataFrame(columns=[
     "ID",
@@ -77,24 +53,20 @@ def add_player(name,score):
     }
 def update_score(name):
     player_data.loc[player_data.Name==name,"Score"]+=1
-# name='Hazel'
-# update_score(name)
-# print(player_data)
 type=1    
 
 class Game:
-    player_data=pd.read_csv(player_file)
     def __init__(self) :
         self.board=make_empty_board()
-        #self._playerx=playerx
-        #self._playero=playero
         self.winner=None #get_winner(self._board)
         self.user_turn=True
+        self.winner_name=None
         
-    
-    def update_score(name):
-        player_data.loc[player_data.Name==name,"Score"]+=1
-        
+    def get_winner_name(self):
+        return self.winner_name
+    def get_winner(self):
+        return self.winner
+
 
     def get_board(self):
         return self.board
@@ -123,8 +95,6 @@ class Game:
         show_board(self.board)
         player1_name=input("Please enter your name:")
         
-        player_data=pd.read_csv(player_file)
-        winner_name=None
         while self.winner is None:
             if self.user_turn:
                 
@@ -146,8 +116,6 @@ class Game:
                     while (col<0 or col>2):
                         col=int(input("out of boundary, please pick a numer(0<= y <3): "))
                 self.set_move(row,col,"X")
-                #print(self._board)
-                #self.winner=get_winner(self._board)
 
                 
                 
@@ -165,52 +133,19 @@ class Game:
             self.winner=get_winner(self.board)
             
             if self.winner=="X":
-                winner_name=player1_name
+                self.winner_name=player1_name
                 print("Congratulation! Yor're winner!")
             elif self.winner=="O":
-                winner_name="Bot"
+                self.winner_name="Bot"
                 print("You failed")
             else:
                 if isfull(self.board):
                     print("The grid is full, draw!")
                     self.winner="Draw"
-                    winner_name="draw"
+                    self.winner_name="draw"
 
             self.user_turn=not self.user_turn
         
-        add_game(len(game_data),player1_name,"Bot",winner_name,type)
-        games.to_csv(filename,mode='a',header=False)
-        if player1_name not in player_data["Name"].tolist():
-            add_player(player1_name,0)
-            players.to_csv(player_file,mode='a',index=False,header=False)
-        player_data=pd.read_csv(player_file)
-        if self.winner=="X":
-            update_score(player1_name)
-            print("Name",player1_name)
-        
-        
-        player_data['Rank']=player_data.Score.rank(method='dense',ascending=False)
-        player_data.to_csv(player_file,index=False)
-        print(games)
-        print("---------------------------------------")
-        print("Global rank: ")
-        print(player_data)
 
         
 
-"""class Human:
-    def get_move(self,x,y,board):
-        return parse_move(input())
-
-class Bot:
-    def get_move(self,board):
-        return some_available_square(board)"""
-
-
-"""game=Game()
-game.run"""
-
-"""b=Board()
-b.set(1,1,'X')
-b.set(2,1,'O')
-print(b)"""
