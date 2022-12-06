@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <h1>Game</h1>
+
+    <table>
+      <tr>
+        <th>Player 1</th>
+        <th>Player 2</th>
+        <!-- Add more columns for additional players if necessary -->
+      </tr>
+      <tr>
+        <td>
+          <form action="game.html" method="post">
+            <label for="player-1-move">Player 1 move:</label>
+            <input type="text" id="player-1-move" name="player-1-move" required>
+            <br>
+            <input type="submit" value="Submit move">
+          </form>
+        </td>
+        <td>
+          <form action="game.html" method="post">
+            <label for="player-2-move">Player 2 move:</label>
+            <input type="text" id="player-2-move" name="player-2-move" required>
+            <br>
+            <input type="submit" value="Submit move">
+          </form>
+        </td>
+        <!-- Add more columns for additional players if necessary -->
+      </tr>
+    </table>
+
+    <p>Current game state:</p >
+    <p>
+      <!-- Use JavaScript or a server-side language to update the game state and display it here -->
+    </p >
+  </body>
+</html>
