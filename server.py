@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,redirect
 from collections import namedtuple
 #flask --app server.py --debug run
+#http://127.0.0.1:5000/
 
 app=Flask(__name__)
 #app=Flask(__name__,static_folder='../static')
