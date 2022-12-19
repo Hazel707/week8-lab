@@ -1,0 +1,13 @@
+<div>
+    DEBUG PAGE
+</div>
+<form method='POST'>
+    what is your move?
+    <input name="x"/>
+    <input name="y"/>
+    <input type="hidden" name="blah" value="chess"/>
+    <button type="submit">submit</button>
+</form>
+<div>
+    {{ request.form }}
+</div>

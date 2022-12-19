@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Game</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
   </head>
   <body>
     <h1>Game</h1>
@@ -32,6 +32,7 @@
         </td>
        
       </tr>
+     
     </table>
 
     <p>Current game state:</p >
@@ -39,9 +40,10 @@
      
     </p >
     <tr>
-      <form action="stats.html" method="get">
-          <button type="submit">statistics</button>
-      </form>
-    </tr>
+        <a href="{{ url_for('stats') }}">
+            <button type="submit">statistics</button>
+            <!--<input type="submit" value="Start game">-->
+        </a>
+      </tr>
   </body>
 </html>
